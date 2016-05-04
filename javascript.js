@@ -6,16 +6,20 @@ $(document).ready(function(){
 			out+='<option value='+data[c].chave+'>'+data[c].nome+'</option>';
 		}
 		$('#selecionar').html(out);
-		$('#submit').click(function(){
-			var i=$('#selecionar').val();
+	});
+	$('#submit').click(function(){
+		var i=$('#selecionar').val();
+		var url='http://192.168.1.109:8080/product?chave='+i;
+		$.getJSON(url, function(data){
 			var result='';
-			result+='Nome: ' + data[i-1].nome + '<br />';
-			result+='Valor: ' + data[i-1].valor + '<br />';
-			result+='Status: ' + data[i-1].status + '<br />';
-			result+='Estoque: ' + data[i-1].estoque + '<br />';
+			result+='Nome: ' + data.nome + '<br />';
+			result+='Valor: ' + data.valor + '<br />';
+			result+='Status: ' + data.status + '<br />';
+			result+='Estoque: ' + data.estoque + '<br />';
 			$('#conteudo').html(result);
 		});
 	});
+		
 	/*
 	$('#submit').click(function(){
 		$.getJSON('http://192.168.1.109:8080/list', function(data){
