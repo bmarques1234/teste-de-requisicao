@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+	//código pesquisa por select:
 	$.getJSON('http://192.168.1.109:8080/list', function(data){
 		var out='';
 		for (var c=0;c<data.length;c++){
@@ -21,15 +21,24 @@ $(document).ready(function(){
 	});
 		
 	/*
-	$('#submit').click(function(){
-		$.getJSON('http://192.168.1.109:8080/list', function(data){
+	requisição por javascript:
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("GET", url, false);
+		xmlhttp.send();
+		return xmlhttp.responseText;
+		var data = JSON.parse(xmlhttp.responseText);
+	requisição por jQuery:
+		$.getJSON(url, function(data){});
+	código pesquisa por input:
+		$('#submit').click(function(){
 			var i = $('#products').val();
-			var result='';
-			result+='Nome: ' + data[i].nome + '<br />';
-			result+='Valor: ' + data[i].valor + '<br />';
-			result+='Status: ' + data[i].status + '<br />';
-			result+='Estoque: ' + data[i].estoque + '<br />';
-			$('#conteudo').html(result);
-		});
-	});*/
+			$.getJSON('http://192.168.1.109:8080/product?chave='+i, function(data){
+				var result='';
+				result+='Nome: ' + data.nome + '<br />';
+				result+='Valor: ' + data.valor + '<br />';
+				result+='Status: ' + data.status + '<br />';
+				result+='Estoque: ' + data.estoque + '<br />';
+				$('#conteudo').html(result);
+			});
+		});*/
 });
