@@ -1,25 +1,34 @@
 $(document).ready(function(){
 	$.getJSON('http://192.168.1.109:8080/list', function(data){
-		var out='';
+		var out='<option selected value=0>Selecione um produto...</option>';
 		for (var c=0;c<data.length;c++){
-			out+='<option value='+data[c].chave+'>'+data[c].nome+'</option>';
+			if(data[c].status == 'I'){
+				out+='<option value='+data[c].chave+' style="color:red">'+data[c].nome+'</option>';
+			}
+			else out+='<option value='+data[c].chave+'>'+data[c].nome+'</option>';
 		}
 		$('#selecionar').html(out);
 	});
 	$('#submit').click(function(){
 		var i=$('#selecionar').val();
-		var url='http://192.168.1.109:8080/product?chave='+i;
-		$.getJSON(url, function(data){
-			var result='';
-			result+='<tr><th>Nome</th>'+'<th>Valor</th>'+'<th>Status</th>'+'<th>Estoque</th></tr>';
-			result+='<tr>'+'<td>'+data.nome+'</td>'+'<td>'+data.valor+'</td>';
-			result+='<td>'+data.status+'</td>'+'<td>'+data.estoque+'</td>'+'</tr>';
-			if(data.status == 'I'){
-				result+='<tr><td colspan="4">Este produto não está disponível</td></tr>';
-			};
-			$('#table').html(result);
-			$('#conteudo').css({'border-radius':'5px','border':'2px solid black','width':'400px','margin':'auto','margin-top':'20px'});
-		});
+		if(i != 0){
+			var url='http://192.168.1.109:8080/product?chave='+i;
+			$.getJSON(url, function(data){
+				var result='';
+				result+='<tr><th>Nome</th>'+'<th>Valor</th>'+'<th>Status</th>'+'<th>Estoque</th></tr>';
+				result+='<tr>'+'<td>'+data.nome+'</td>'+'<td>'+data.valor+'</td>';
+				result+='<td>'+data.status+'</td>'+'<td>'+data.estoque+'</td>'+'</tr>';
+				if(data.status == 'I'){
+					result+='<tr><td colspan="4">Este produto não está disponível</td></tr>';
+				};
+				$('#table').html(result);
+				$('#conteudo').addClass('content');
+			});
+		}
+		else{
+			$('#table').html('');
+			$('#conteudo').removeClass('content');
+		}
 	});
 		
 	/*
