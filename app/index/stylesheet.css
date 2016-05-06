@@ -1,0 +1,13 @@
+#body{
+	text-align:center;
+}
+#table,th,td{
+	text-align:center;
+	margin:auto;
+	font-size:20px;
+	font-family:cursive;
+	padding:10px;
+}
+.select{
+	font-size:20px;
+}
