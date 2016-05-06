@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	//código pesquisa por select:
 	$.getJSON('http://192.168.1.109:8080/list', function(data){
 		var out='';
 		for (var c=0;c<data.length;c++){
@@ -18,10 +17,6 @@ $(document).ready(function(){
 			if(data.status == 'I'){
 				result+='<tr><td colspan="4">Este produto não está disponível</td></tr>';
 			};
-			/*result+='Nome: ' + data.nome + '<br />';
-			result+='Valor: ' + data.valor + '<br />';
-			result+='Status: ' + data.status + '<br />';
-			result+='Estoque: ' + data.estoque + '<br />';*/
 			$('#table').html(result);
 			$('#conteudo').css({'border-radius':'5px','border':'2px solid black','width':'400px','margin':'auto','margin-top':'20px'});
 		});
@@ -35,17 +30,5 @@ $(document).ready(function(){
 		return xmlhttp.responseText;
 		var data = JSON.parse(xmlhttp.responseText);
 	requisição por jQuery:
-		$.getJSON(url, function(data){});
-	código pesquisa por input:
-		$('#submit').click(function(){
-			var i = $('#products').val();
-			$.getJSON('http://192.168.1.109:8080/product?chave='+i, function(data){
-				var result='';
-				result+='Nome: ' + data.nome + '<br />';
-				result+='Valor: ' + data.valor + '<br />';
-				result+='Status: ' + data.status + '<br />';
-				result+='Estoque: ' + data.estoque + '<br />';
-				$('#conteudo').html(result);
-			});
-		});*/
+		$.getJSON(url, function(data){});*/
 });
