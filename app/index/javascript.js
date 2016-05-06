@@ -12,14 +12,6 @@ function att(data){
 $(document).ready(function(){
 	$.getJSON('http://192.168.1.109:8080/list', function(data){
 		att(data);
-		var out='<option selected value="">Selecione um produto...</option><option value=0>todos</option>';
-		for (var c=0;c<data.length;c++){
-			if(data[c].status == 'I'){
-				out+='<option value='+data[c].chave+' style="color:red">'+data[c].nome+'</option>';
-			}
-			else out+='<option value='+data[c].chave+'>'+data[c].nome+'</option>';
-		}
-		$('#selecionar').html(out);
 		$('#submit').click(function(){
 			var i=$('#selecionar').val();
 			var result='';
@@ -27,7 +19,7 @@ $(document).ready(function(){
 				var url='http://192.168.1.109:8080/product?chave='+i;
 				$.getJSON(url, function(data){
 					result+='<tr><th>Nome</th>'+'<th>Valor</th>'+'<th>Status</th>'+'<th>Estoque</th></tr>';
-					result+='<tr>'+'<td>'+data.nome+'</td>'+'<td>'+data.valor+'</td>';
+					result+='<tr>'+'<td>'+data.nome+'</td>'+'<td>R$ '+data.valor+'</td>';
 					result+='<td>'+data.status+'</td>'+'<td>'+data.estoque+'</td>'+'</tr>';
 					if(data.status == 'I'){
 						result+='<tr><td colspan="4" style="color:red">Este produto não está disponível</td></tr>';
@@ -47,7 +39,7 @@ $(document).ready(function(){
 					for (var c=0;c<data.length;c++){
 						if(data[c].status == 'I') result+='<tr style="color:red">'
 						else result+='<tr>'
-						result+='<td>'+data[c].nome+'</td>'+'<td>'+data[c].valor+'</td>';
+						result+='<td>'+data[c].nome+'</td>'+'<td>R$ '+data[c].valor+'</td>';
 						result+='<td>'+data[c].status+'</td>'+'<td>'+data[c].estoque+'</td>'+'</tr>';
 					};
 					$('#table').html(result);
