@@ -14,6 +14,7 @@ function show(allData,url){
 		var result='<tr><th>Nome</th>'+'<th>Valor</th>'+'<th>Status</th>'+'<th>Estoque</th></tr>';
 		if(allData==true){
 			att(data);
+			$("#selecionar").val(0)
 			for (var c=0;c<data.length;c++){
 				if(data[c].status == 'I') result+='<tr style="color:red">';
 				else result+='<tr>';
@@ -37,7 +38,7 @@ function show(allData,url){
 $(document).ready(function(){
 	$.getJSON('http://192.168.1.109:8080/list', function(data){
 		att(data);
-		$('#submit').click(function(){
+		$('#selecionar').change(function(){
 			var i=$('#selecionar').val();
 			if(i == ''){
 				$('#table').html('');
