@@ -14,7 +14,7 @@ function show(allData,url){
 		var result='<tr><th>Nome</th>'+'<th>Valor</th>'+'<th>Status</th>'+'<th>Estoque</th></tr>';
 		if(allData==true){
 			att(data);
-			$("#selecionar").val(0)
+			$("#selecionar").val(0);
 			for (var c=0;c<data.length;c++){
 				if(data[c].status == 'I') result+='<tr style="color:red">';
 				else result+='<tr>';
