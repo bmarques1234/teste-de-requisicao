@@ -1,18 +1,17 @@
 function att(data){
-	var out='<option selected value="">Selecione um produto...</option><option value=0>todos</option>';
+	var options='<option selected value="">Selecione um produto...</option><option value=0>todos</option>';
 	for (var c=0;c<data.length;c++){
 		if(data[c].status == 'I'){
-			out+='<option value='+data[c].chave+' style="color:red">'+data[c].nome+'</option>';
+			options+='<option value='+data[c].chave+' style="color:red">'+data[c].nome+'</option>';
 		}
-		else out+='<option value='+data[c].chave+'>'+data[c].nome+'</option>';
+		else options+='<option value='+data[c].chave+'>'+data[c].nome+'</option>';
 	}
-	$('#selecionar').html(out);
+	$('#selecionar').html(options);
 }
 
-function get(allData,url){
+function show(allData,url){
 	$.getJSON(url, function(data){
-		var result='';
-		result+='<tr><th>Nome</th>'+'<th>Valor</th>'+'<th>Status</th>'+'<th>Estoque</th></tr>';
+		var result='<tr><th>Nome</th>'+'<th>Valor</th>'+'<th>Status</th>'+'<th>Estoque</th></tr>';
 		if(allData==true){
 			att(data);
 			for (var c=0;c<data.length;c++){
@@ -45,10 +44,10 @@ $(document).ready(function(){
 				$('#conteudo').removeClass('content');
 			}
 			else if(i == 0){
-				get(true, 'http://192.168.1.109:8080/list');
+				show(true, 'http://192.168.1.109:8080/list');
 			}
 			else if(i != 0){
-				get(false, 'http://192.168.1.109:8080/product?chave='+i);
+				show(false, 'http://192.168.1.109:8080/product?chave='+i);
 			}
 		});
 	});	
